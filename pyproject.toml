@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+authors = ["Yuriy Totyshev <freewan@desktop>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+  { include = "gendiff" },
+]
+
+
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: Unix",
+    "Programming Language :: Python",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
