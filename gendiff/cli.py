@@ -32,3 +32,7 @@ def message_not_supported(extension, supported):
 
 def message_not_exists(path):
     print(f'File {path} is not exists')
+
+
+def diff_message(output: str):
+    print(output)
