@@ -1,3 +1,4 @@
+from __future__ import annotations
 from gendiff.file_reader import get_data
 from gendiff.formatters import json, plain, stylish
 
@@ -12,7 +13,7 @@ EXPECTED_FORMATTERS = {
 def find_difference(data_1: dict, data_2: dict) -> list[dict]:
     if not isinstance(data_1, dict) or not isinstance(data_2, dict):
         return
-    
+
     all_keys = sorted(data_1.keys() | data_2.keys())
     difference = {}
 
@@ -40,14 +41,15 @@ def find_difference(data_1: dict, data_2: dict) -> list[dict]:
 
     return difference
 
-def generate_diff(file_1, file_2, formatter_type):
-    data_1 = get_data(file_1)
-    data_2 = get_data(file_2)
+
+def generate_diff(file_path: str, file2_path: str, formatter_type: str) -> str:
+    data_1 = get_data(file_path)
+    data_2 = get_data(file2_path)
 
     difference = find_difference(data_1, data_2)
     if not difference:
         return
-    
+
     formatter = EXPECTED_FORMATTERS.get(formatter_type)
     output = formatter.make_output(difference)
 
