@@ -1,2 +1,2 @@
-def make_output(difference):
-    print('plain', difference)
+def make_output(difference: dict) -> str:
+    ...

@@ -23,15 +23,19 @@ def find_difference(data_1: dict, data_2: dict) -> list[dict]:
         if key not in data_1:
             node['status'] = 'added'
             node['data'] = data_2[key]
+
         elif key not in data_2:
             node['status'] = 'removed'
             node['data'] = data_1[key]
+
         elif data_1[key] == data_2[key]:
             node['status'] = 'not changed'
             node['data'] = data_1[key]
+
         elif isinstance(data_1[key], dict) and isinstance(data_2[key], dict):
             node['status'] = 'nested'
             node['children'] = find_difference(data_1[key], data_2[key])
+
         else:
             node['status'] = 'changed'
             node['old_data'] = data_1[key]
@@ -48,7 +52,7 @@ def generate_diff(file_path: str, file2_path: str, formatter_type: str) -> str:
 
     difference = find_difference(data_1, data_2)
     if not difference:
-        return
+        return ''
 
     formatter = EXPECTED_FORMATTERS.get(formatter_type)
     output = formatter.make_output(difference)
