@@ -11,6 +11,7 @@ JSON_TRANSLATOR = {
     'None': 'null'
 }
 
+
 def translate_to_json_format(data) -> str:
     if str(data) in JSON_TRANSLATOR:
         return JSON_TRANSLATOR[str(data)]
@@ -20,7 +21,7 @@ def translate_to_json_format(data) -> str:
 def make_child_string(data, indent: str) -> str:
     if not isinstance(data, dict):
         return translate_to_json_format(str(data))
-    
+
     node_indent = indent
     value_indent = indent + INDENT_LEVEL
     lines = []
@@ -38,15 +39,15 @@ def make_node_string(key, data, indent):
     if status == 'not changed':
         child_string = make_child_string(data[key]["data"], indent)
         return f'{indent}{key}: {child_string}\n'
-    
+
     elif status == 'added':
         child_string = make_child_string(data[key]["data"], indent)
         return f'{indent[:-2]}+{INDENT_CHAR}{key}: {child_string}\n'
-    
+
     elif status == 'removed':
         child_string = make_child_string(data[key]["data"], indent)
         return f'{indent[:-2]}-{INDENT_CHAR}{key}: {child_string}\n'
-    
+
     elif status == 'changed':
         child_string_old = make_child_string(data[key]["old_data"], indent)
         child_string_new = make_child_string(data[key]["new_data"], indent)
@@ -68,7 +69,7 @@ def make_stylish(difference: dict) -> str:
             else:
                 data_string = make_node_string(key, data, indent)
                 result.append(data_string)
-                
+
     collect_lines(difference, 1)
 
     return ''.join(['{\n', *result, '}'])
@@ -78,7 +79,3 @@ def make_output(difference: dict) -> str:
     if not isinstance(difference, dict):
         return str(difference)
     return make_stylish(difference)
-
-    
-
-    

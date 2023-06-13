@@ -46,13 +46,16 @@ def find_difference(data_1: dict, data_2: dict) -> list[dict]:
     return difference
 
 
-def generate_diff(file_path: str, file2_path: str, formatter_type: str) -> str:
-    data_1 = get_data(file_path)
+def generate_diff(file1_path: str,
+                  file2_path: str,
+                  formatter_type: str) -> str | None:
+    data_1 = get_data(file1_path)
     data_2 = get_data(file2_path)
+    if not data_1 or not data_2:
+        return
 
     difference = find_difference(data_1, data_2)
-    if not difference:
-        return ''
+    print(difference)
 
     formatter = EXPECTED_FORMATTERS.get(formatter_type)
     output = formatter.make_output(difference)
