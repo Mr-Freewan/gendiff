@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import json
 import yaml
+import sys
 from gendiff import cli
 
 
@@ -33,7 +34,7 @@ def get_data(file_path: str) -> dict | None:
     if not supported:
         cli.message_not_supported(extension,
                                   tuple(SUPPORTED_READERS.keys()))
-        return
+        sys.exit(1)
 
     try:
         with open(file_path, 'r') as file:
@@ -42,4 +43,4 @@ def get_data(file_path: str) -> dict | None:
 
     except FileNotFoundError:
         cli.message_not_exists(file_path)
-        return
+        sys.exit(1)
