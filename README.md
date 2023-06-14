@@ -46,3 +46,24 @@ Test running after installation:
     -h, --help            show this help message and exit
     -f {stylish,json,plain}, --format {stylish,json,plain}
                             set format of output. Default is stylish
+
+### Building from repo and test running
+Steps (see video below):
+
+    git clone https://github.com/Mr-Freewan/python-project-50.git
+
+    cd python-project-50/
+
+    poetry install
+
+    poetry build
+
+Test running with poetry:
+
+    poetry run gendiff
+
+Test running without poetry:
+
+    make package-install
+
+    gendiff
