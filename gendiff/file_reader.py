@@ -26,15 +26,13 @@ def is_supported(file_path: str) -> bool:
     return True
 
 
-def get_data(file_path: str, cli_mode: bool = True) -> dict | None:
+def get_data(file_path: str) -> dict | None:
     supported = is_supported(file_path)
     extension = get_file_extension(file_path)
 
     if not supported:
-        if cli_mode:
-            cli.message_not_supported(extension,
-                                      tuple(SUPPORTED_READERS.keys()))
-        return
+        cli.message_not_supported(extension,
+                                    tuple(SUPPORTED_READERS.keys()))
 
     try:
         with open(file_path, 'r') as file:
@@ -42,6 +40,5 @@ def get_data(file_path: str, cli_mode: bool = True) -> dict | None:
             return reader(file)
 
     except FileNotFoundError:
-        if cli_mode:
-            cli.message_not_exists(file_path)
-        return
+        cli.message_not_exists(file_path)
+
