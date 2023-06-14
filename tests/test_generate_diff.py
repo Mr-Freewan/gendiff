@@ -35,8 +35,8 @@ def get_path(file):
                              'stylish',
                              'correct_nested_stylish_output.txt'),
                             # Nested structure and JSON output
-                            ('file1_nested.json',
-                             'file2_nested.json',
+                            ('file1_nested.yaml',
+                             'file2_nested.yml',
                              'json',
                              'correct_nested_json_output.txt'),
                             # Equal Files
@@ -62,7 +62,7 @@ def test_generate_diff(file1_path: str, file2_path: str,
                              'stylish',
                              None),
                             # File not exists
-                            ('file1_nested.py',
+                            ('file1.json',
                              'file2_nested.json',
                              'stylish',
                              None),

@@ -11,9 +11,6 @@ EXPECTED_FORMATTERS = {
 
 
 def find_difference(data_1: dict, data_2: dict) -> list[dict]:
-    if not isinstance(data_1, dict) or not isinstance(data_2, dict):
-        return
-
     all_keys = sorted(data_1.keys() | data_2.keys())
     difference = {}
 
@@ -55,9 +52,7 @@ def generate_diff(file1_path: str,
         return
 
     difference = find_difference(data_1, data_2)
-    print(difference)
 
     formatter = EXPECTED_FORMATTERS.get(formatter_type)
-    output = formatter.make_output(difference)
 
-    return output
+    return formatter.make_output(difference)

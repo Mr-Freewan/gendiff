@@ -20,7 +20,7 @@ def translate_to_json_format(data) -> str:
 
 def make_child_string(data, indent: str) -> str:
     if not isinstance(data, dict):
-        return translate_to_json_format(str(data))
+        return translate_to_json_format(data)
 
     node_indent = indent
     value_indent = indent + INDENT_LEVEL
@@ -33,7 +33,7 @@ def make_child_string(data, indent: str) -> str:
     return ''.join(['{\n', *lines, node_indent + '}'])
 
 
-def make_node_string(key, data, indent):
+def make_node_string(key: str, data, indent: str) -> str:
     status = data[key].get('status')
 
     if status == 'not changed':
