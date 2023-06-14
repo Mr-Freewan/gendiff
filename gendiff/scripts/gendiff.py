@@ -8,6 +8,10 @@ def main():
     output = generate_diff(args.first_file,
                            args.second_file,
                            args.format)
+
+    if not output:
+        output = 'There are no changes'
+
     cli.diff_message(output)
 
 

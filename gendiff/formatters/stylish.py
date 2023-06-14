@@ -35,28 +35,31 @@ def make_child_string(data, indent: str) -> str:
 
 def make_node_string(key: str, data, indent: str) -> str:
     status = data[key].get('status')
+    node_string = ''
 
     if status == 'not changed':
         child_string = make_child_string(data[key]["data"], indent)
-        return f'{indent}{key}: {child_string}\n'
+        node_string = f'{indent}{key}: {child_string}\n'
 
     elif status == 'added':
         child_string = make_child_string(data[key]["data"], indent)
-        return f'{indent[:-2]}+{INDENT_CHAR}{key}: {child_string}\n'
+        node_string = f'{indent[:-2]}+{INDENT_CHAR}{key}: {child_string}\n'
 
     elif status == 'removed':
         child_string = make_child_string(data[key]["data"], indent)
-        return f'{indent[:-2]}-{INDENT_CHAR}{key}: {child_string}\n'
+        node_string = f'{indent[:-2]}-{INDENT_CHAR}{key}: {child_string}\n'
 
     elif status == 'changed':
         child_string_old = make_child_string(data[key]["old_data"], indent)
         child_string_new = make_child_string(data[key]["new_data"], indent)
         old_string = f'{indent[:-2]}-{INDENT_CHAR}{key}: {child_string_old}\n'
         new_string = f'{indent[:-2]}+{INDENT_CHAR}{key}: {child_string_new}\n'
-        return old_string + new_string
+        node_string = old_string + new_string
+
+    return node_string
 
 
-def make_stylish(difference: dict) -> str:
+def make_output(difference: dict) -> str:
     result = []
 
     def collect_lines(data, level):
@@ -73,9 +76,3 @@ def make_stylish(difference: dict) -> str:
     collect_lines(difference, 1)
 
     return ''.join(['{\n', *result, '}'])
-
-
-def make_output(difference: dict) -> str:
-    if not isinstance(difference, dict):
-        return str(difference)
-    return make_stylish(difference)

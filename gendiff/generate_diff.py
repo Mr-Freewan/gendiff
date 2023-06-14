@@ -48,8 +48,6 @@ def generate_diff(file1_path: str,
                   formatter_type: str) -> str | None:
     data_1 = get_data(file1_path)
     data_2 = get_data(file2_path)
-    if not data_1 or not data_2:
-        return
 
     difference = find_difference(data_1, data_2)
 
