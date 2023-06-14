@@ -32,7 +32,8 @@ def get_data(file_path: str) -> dict | None:
 
     if not supported:
         cli.message_not_supported(extension,
-                                    tuple(SUPPORTED_READERS.keys()))
+                                  tuple(SUPPORTED_READERS.keys()))
+        return
 
     try:
         with open(file_path, 'r') as file:
@@ -41,4 +42,4 @@ def get_data(file_path: str) -> dict | None:
 
     except FileNotFoundError:
         cli.message_not_exists(file_path)
-
+        return
