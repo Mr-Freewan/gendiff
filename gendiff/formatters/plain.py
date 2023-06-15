@@ -51,16 +51,16 @@ def make_node_string(key: str, data: Any, path: str) -> str:
 
     if status == 'added':
         value = make_child_string(data[key]["data"])
-        node_string = f"Property '{path}' was added with value: {value}\n"
+        node_string = f"Property '{path}' was added with value: {value}"
 
     elif status == 'removed':
-        node_string = f"Property '{path}' was removed\n"
+        node_string = f"Property '{path}' was removed"
 
     elif status == 'changed':
         value_old = make_child_string(data[key]["old_data"])
         value_new = make_child_string(data[key]["new_data"])
         node_string = f"Property '{path}' was updated. " \
-                      f"From {value_old} to {value_new}\n"
+                      f"From {value_old} to {value_new}"
 
     return node_string
 
@@ -100,4 +100,4 @@ def make_output(difference: dict) -> str:
 
     collect_lines(difference, [])
 
-    return ''.join(result)[:-1]
+    return '\n'.join(result)
