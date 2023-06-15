@@ -12,6 +12,16 @@ EXPECTED_FORMATTERS = {
 
 
 def find_difference(data_1: dict, data_2: dict) -> list[dict]:
+    """
+    Find difference between two versions of file
+
+    Args:
+        data_1 (dict): Data from old file
+        data_2 (dict): Data from new file
+
+    Returns:
+        list[dict]: Dictionary of differencies
+    """
     all_keys = sorted(data_1.keys() | data_2.keys())
     difference = {}
 
@@ -44,9 +54,20 @@ def find_difference(data_1: dict, data_2: dict) -> list[dict]:
     return difference
 
 
-def generate_diff(file1_path: str,
-                  file2_path: str,
-                  formatter_type: str = 'stylish') -> str | None:
+def generate_diff(file1_path: str, file2_path: str,
+                  formatter_type: str = 'stylish') -> str:
+    """
+    Makes difference of two versions of file in expexted format
+
+    Args:
+        file1_path (str): Path of first file
+        file2_path (str): Path of second file
+        formatter_type (str, optional): Formatter type.
+        Can be 'stylish', 'json' or 'plain'. Default is 'stylish'.
+
+    Returns:
+        str: Difference string in selected format
+    """
     data_1 = get_data(file1_path)
     data_2 = get_data(file2_path)
 

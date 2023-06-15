@@ -11,6 +11,15 @@ JSON_TRANSLATOR = {
 
 
 def make_child_string(data: Any) -> str:
+    """
+    Makes line of changes for values
+
+    Args:
+        data (Any): Value of some key
+
+    Returns:
+        str: Changed value in plain format
+    """
     child_string = str(data)
 
     if isinstance(data, dict) or isinstance(data, list):
@@ -26,6 +35,17 @@ def make_child_string(data: Any) -> str:
 
 
 def make_node_string(key: str, data: Any, path: str) -> str:
+    """
+    Makes line of changes for keys
+
+    Args:
+        key (str): Key for which the line is makes
+        data (Any): Dictionary of differences
+        path (str): Path to changing, consisting of parent keys
+
+    Returns:
+        str: Change string for the key
+    """
     status = data[key].get('status')
     node_string = ''
 
@@ -46,9 +66,26 @@ def make_node_string(key: str, data: Any, path: str) -> str:
 
 
 def make_output(difference: dict) -> str:
+    """
+    Makes string of differencies in plain format
+
+    Args:
+        difference (dict): Dictionary of differences
+
+    Returns:
+        str: String of differencies in plain format
+    """
     result = []
 
     def collect_lines(data: Any, path: list) -> None:
+        """
+        Traverses the dictionary in depth and fills the external list
+        with strings of changes in plain format
+
+        Args:
+            data (Any): Dictionary of differences or key/value
+            path (list): Path to changing, consisting of parent keys
+        """
         for key in data:
             status = data[key].get('status')
 

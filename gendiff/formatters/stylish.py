@@ -5,7 +5,7 @@ from typing import Any
 
 INDENT_CHAR = ' '
 INDENT_COUNT = 4  # Must be > 2
-INDENT_LEVEL = INDENT_CHAR * INDENT_COUNT
+INDENT_LEVEL = INDENT_CHAR * INDENT_COUNT  # indent for each lvl
 
 JSON_TRANSLATOR = {
     'True': 'true',
@@ -15,6 +15,15 @@ JSON_TRANSLATOR = {
 
 
 def translate_to_json_format(data: Any) -> str:
+    """
+    Converts value to string format
+
+    Args:
+        data (Any): Value of some key
+
+    Returns:
+        str: Value in string format
+    """
     if str(data) in JSON_TRANSLATOR:
         return JSON_TRANSLATOR[str(data)]
 
@@ -22,6 +31,16 @@ def translate_to_json_format(data: Any) -> str:
 
 
 def make_child_string(data: Any, indent: str) -> str:
+    """
+    Makes line of changes for values
+
+    Args:
+        data (Any): Value of some key
+        indent (str): Changed value or key
+
+    Returns:
+        str: Value in stylish format
+    """
     if not isinstance(data, dict):
         return translate_to_json_format(data)
 
@@ -37,6 +56,17 @@ def make_child_string(data: Any, indent: str) -> str:
 
 
 def make_node_string(key: str, data: Any, indent: str) -> str:
+    """
+    Makes line of changes for keys
+
+    Args:
+        key (str): Key for which the line is makes
+        data (Any): Dictionary of differences
+        indent (str): Current indent level
+
+    Returns:
+        str: String of changes for the key in stylish format
+    """
     status = data[key].get('status')
     node_string = ''
 
@@ -63,9 +93,26 @@ def make_node_string(key: str, data: Any, indent: str) -> str:
 
 
 def make_output(difference: dict) -> str:
+    """
+    Makes string of differencies in stylish format
+
+    Args:
+        difference (dict): Dictionary of differences
+
+    Returns:
+        str: String of differencies in plain format
+    """
     result = []
 
     def collect_lines(data: Any, level: int) -> None:
+        """
+        Traverses the dictionary in depth and fills the external list
+        with strings of changes in stylish format
+
+        Args:
+            data (Any): Dictionary of differences or key/value
+            level (int): Current indent level
+        """
         indent = INDENT_LEVEL * level
         for key in data:
             if data[key].get('status') != 'nested':

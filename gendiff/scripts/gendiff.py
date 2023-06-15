@@ -12,7 +12,7 @@ def main():
     if not output:
         output = 'There are no changes'
 
-    cli.diff_message(output)
+    print(output)
 
 
 if __name__ == "__main__":
