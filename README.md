@@ -67,3 +67,35 @@ Test running without poetry:
     make package-install
 
     gendiff
+
+[![asciicast](https://asciinema.org/a/AIGAJEtM2oUwNuhc7Mqj6dfax.svg)](https://asciinema.org/a/AIGAJEtM2oUwNuhc7Mqj6dfax)
+
+---
+
+### Demonstration:
+
+---
+
+Launch gendiff in stylish format:
+
+    gendiff file1_.json file2_.json
+
+or
+
+    gendiff file1_.json file2_.json -f stylish    
+
+Launch gendiff in json format:
+
+    poetry run gendiff file1_.json file2_.json -f json
+
+Launch gendiff in plain format:
+
+    poetry run gendiff file1_.json file2_.json -f plain
+
+### Flat JSON or YAML files
+
+[![asciicast](https://asciinema.org/a/nHA0Wdog6Jh6gMAHvla62a96K.svg)](https://asciinema.org/a/nHA0Wdog6Jh6gMAHvla62a96K)
+
+### Nested JSON or YAML files
+
+[![asciicast](https://asciinema.org/a/NJT00vWpB4OlTUmbIX2ILYptV.svg)](https://asciinema.org/a/NJT00vWpB4OlTUmbIX2ILYptV)
