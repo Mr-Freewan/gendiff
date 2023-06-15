@@ -68,13 +68,14 @@ def make_output(difference: dict) -> str:
     def collect_lines(data: Any, level: int) -> None:
         indent = INDENT_LEVEL * level
         for key in data:
-            if data[key].get('status') == 'nested':
-                result.extend([f'{indent}{key}: ', '{\n'])
-                collect_lines(data[key]['children'], level + 1)
-                result.extend([indent, '}\n'])
-            else:
+            if data[key].get('status') != 'nested':
                 data_string = make_node_string(key, data, indent)
                 result.append(data_string)
+                continue
+
+            result.extend([f'{indent}{key}: ', '{\n'])
+            collect_lines(data[key]['children'], level + 1)
+            result.extend([indent, '}\n'])
 
     collect_lines(difference, 1)
 

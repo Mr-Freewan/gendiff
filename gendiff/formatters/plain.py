@@ -50,13 +50,16 @@ def make_output(difference: dict) -> str:
 
     def collect_lines(data: Any, path: list) -> None:
         for key in data:
-            if data[key].get('status') == 'nested':
+            status = data[key].get('status')
+
+            if status == 'nested':
                 collect_lines(data[key]['children'], path + [key])
-            else:
-                path_to_change = '.'.join(path + [key])
-                change_string = make_node_string(key, data, path_to_change)
-                if change_string:
-                    result.append(change_string)
+                continue
+
+            path_to_change = '.'.join(path + [key])
+            change_string = make_node_string(key, data, path_to_change)
+            if change_string:
+                result.append(change_string)
 
     collect_lines(difference, [])
 
