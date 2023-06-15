@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from gendiff.file_reader import get_data
 from gendiff.formatters import json, plain, stylish
 
@@ -45,7 +46,7 @@ def find_difference(data_1: dict, data_2: dict) -> list[dict]:
 
 def generate_diff(file1_path: str,
                   file2_path: str,
-                  formatter_type: str) -> str | None:
+                  formatter_type: str = 'stylish') -> str | None:
     data_1 = get_data(file1_path)
     data_2 = get_data(file2_path)
 

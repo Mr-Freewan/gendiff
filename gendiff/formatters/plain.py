@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 
 JSON_TRANSLATOR = {
     'True': "true",
@@ -8,7 +10,7 @@ JSON_TRANSLATOR = {
 }
 
 
-def make_child_string(data) -> str:
+def make_child_string(data: Any) -> str:
     child_string = str(data)
 
     if isinstance(data, dict) or isinstance(data, list):
@@ -23,7 +25,7 @@ def make_child_string(data) -> str:
     return child_string
 
 
-def make_node_string(key: str, data, path: str) -> str:
+def make_node_string(key: str, data: Any, path: str) -> str:
     status = data[key].get('status')
     node_string = ''
 
@@ -46,7 +48,7 @@ def make_node_string(key: str, data, path: str) -> str:
 def make_output(difference: dict) -> str:
     result = []
 
-    def collect_lines(data, path: list):
+    def collect_lines(data: Any, path: list) -> None:
         for key in data:
             if data[key].get('status') == 'nested':
                 collect_lines(data[key]['children'], path + [key])

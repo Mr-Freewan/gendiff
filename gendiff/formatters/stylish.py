@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 
 INDENT_CHAR = ' '
 INDENT_COUNT = 4  # Must be > 2
@@ -12,13 +14,14 @@ JSON_TRANSLATOR = {
 }
 
 
-def translate_to_json_format(data) -> str:
+def translate_to_json_format(data: Any) -> str:
     if str(data) in JSON_TRANSLATOR:
         return JSON_TRANSLATOR[str(data)]
+
     return str(data)
 
 
-def make_child_string(data, indent: str) -> str:
+def make_child_string(data: Any, indent: str) -> str:
     if not isinstance(data, dict):
         return translate_to_json_format(data)
 
@@ -26,14 +29,14 @@ def make_child_string(data, indent: str) -> str:
     value_indent = indent + INDENT_LEVEL
     lines = []
 
-    for key in data.keys():
+    for key in data:
         value = make_child_string(data[key], value_indent)
         lines.append(f'{value_indent}{key}: {value}\n')
 
     return ''.join(['{\n', *lines, node_indent + '}'])
 
 
-def make_node_string(key: str, data, indent: str) -> str:
+def make_node_string(key: str, data: Any, indent: str) -> str:
     status = data[key].get('status')
     node_string = ''
 
@@ -62,7 +65,7 @@ def make_node_string(key: str, data, indent: str) -> str:
 def make_output(difference: dict) -> str:
     result = []
 
-    def collect_lines(data, level):
+    def collect_lines(data: Any, level: int) -> None:
         indent = INDENT_LEVEL * level
         for key in data:
             if data[key].get('status') == 'nested':

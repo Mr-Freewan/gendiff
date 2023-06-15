@@ -27,7 +27,7 @@ def is_supported(file_path: str) -> bool:
     return True
 
 
-def get_data(file_path: str) -> dict | None:
+def get_data(file_path: str) -> dict | SystemExit:
     supported = is_supported(file_path)
     extension = get_file_extension(file_path)
 
