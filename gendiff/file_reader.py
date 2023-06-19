@@ -15,7 +15,7 @@ def get_file_extension(file_path: str) -> str:
         file_path (str): Path of file
 
     Returns:
-        str: File extension with dot. '.json' for example
+        str: File extension without dot. 'json' for example
     """
     _, file_extension = os.path.splitext(file_path)
     return file_extension.replace('.', '')
