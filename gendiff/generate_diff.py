@@ -13,11 +13,11 @@ EXPECTED_FORMATTERS = {
 
 def find_difference(data_1: dict, data_2: dict) -> list[dict]:
     """
-    Find difference between two versions of file
+    Find difference between two versions of data
 
     Args:
-        data_1 (dict): Data from old file
-        data_2 (dict): Data from new file
+        data_1 (dict): Old data
+        data_2 (dict): New data
 
     Returns:
         list[dict]: Dictionary of differencies

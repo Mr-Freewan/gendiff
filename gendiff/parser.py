@@ -18,7 +18,7 @@ def parse(data: str | TextIO, data_format: str) -> dict | None:
     Now supported JSON or YAML
 
     Args:
-        data (Any): Data from request or _io.TextIOWrapper
+        data (str | TextIO): Data from request or _io.TextIOWrapper
         data_format (str): Format of data: 'json', 'yaml' or 'yml'
 
     Returns:

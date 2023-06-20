@@ -24,10 +24,7 @@ def translate_to_json_format(data: Any) -> str:
     Returns:
         str: Value in string format
     """
-    if str(data) in JSON_TRANSLATOR:
-        return JSON_TRANSLATOR[str(data)]
-
-    return str(data)
+    return JSON_TRANSLATOR.get(str(data), str(data))
 
 
 def make_child_string(data: Any, indent: str) -> str:
@@ -55,13 +52,13 @@ def make_child_string(data: Any, indent: str) -> str:
     return ''.join(['{\n', *lines, node_indent + '}'])
 
 
-def make_node_string(key: str, data: Any, indent: str) -> str:
+def make_node_string(key: str, data: dict, indent: str) -> str:
     """
     Makes line of changes for keys
 
     Args:
         key (str): Key for which the line is makes
-        data (Any): Dictionary of differences
+        data (dict): Dictionary of differences
         indent (str): Current indent level
 
     Returns:

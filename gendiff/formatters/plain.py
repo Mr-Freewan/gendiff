@@ -28,19 +28,16 @@ def make_child_string(data: Any) -> str:
     elif isinstance(data, str):
         child_string = f"'{data}'"
 
-    elif str(data) in JSON_TRANSLATOR:
-        child_string = JSON_TRANSLATOR[str(data)]
-
-    return child_string
+    return JSON_TRANSLATOR.get(child_string, child_string)
 
 
-def make_node_string(key: str, data: Any, path: str) -> str:
+def make_node_string(key: str, data: dict, path: str) -> str:
     """
     Makes line of changes for keys
 
     Args:
         key (str): Key for which the line is makes
-        data (Any): Dictionary of differences
+        data (dict): Dictionary of differences
         path (str): Path to changing, consisting of parent keys
 
     Returns:
