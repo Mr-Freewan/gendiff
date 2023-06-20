@@ -61,7 +61,8 @@ def get_data(file_path: str) -> dict | SystemExit:
         sys.exit(1)
 
     try:
-        return parse(open(file_path), extension)
+        with open(file_path, 'r') as file:
+            return parse(file, extension)
 
     except FileNotFoundError:
         cli.message_not_exists(file_path)
