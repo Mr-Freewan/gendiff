@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TextIO
 import json
 import yaml
 
@@ -12,7 +12,7 @@ SUPPORTED_PARSERS = {
 }
 
 
-def parse(data: Any, data_format: str) -> dict | None:
+def parse(data: str | TextIO, data_format: str) -> dict | None:
     """
     Parse data from requests or files in supported format.
     Now supported JSON or YAML
