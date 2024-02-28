@@ -28,7 +28,7 @@ This project was built using these tools:
 
 ### Installation with pip
 
-    pip install git+https://github.com/Mr-Freewan/python-project-50.git
+    pip install git+https://github.com/Mr-Freewan/gendiff.git
     
 Test running after installation:
 
