@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Any
 
-
 JSON_TRANSLATOR = {
     'True': "true",
     'False': "false",
@@ -56,8 +55,8 @@ def make_node_string(key: str, data: dict, path: str) -> str:
     elif status == 'changed':
         value_old = make_child_string(data[key]["old_data"])
         value_new = make_child_string(data[key]["new_data"])
-        node_string = f"Property '{path}' was updated. " \
-                      f"From {value_old} to {value_new}"
+        node_string = (f"Property '{path}' was updated. "
+                       f"From {value_old} to {value_new}")
 
     return node_string
 
